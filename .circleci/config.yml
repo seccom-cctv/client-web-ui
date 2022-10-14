@@ -11,8 +11,13 @@ jobs:
             cd ./client-web-ui
             npm install
             npm test
-            
+
 workflows:
   build-and-test:
     jobs:
       - test
+        filters:
+              branches:
+                only:
+                  - main
+                  - develop
