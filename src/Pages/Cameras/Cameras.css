@@ -1,3 +1,8 @@
 .cameras {
     padding: 120px 4rem 50px 4rem;
 }
+
+.cameras-header {
+    margin-bottom: 2rem;
+    margin-left: 3rem;
+}

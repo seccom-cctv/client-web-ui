@@ -1,7 +1,9 @@
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import './CameraCard.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 import img from './image.jpg';
+import { Link } from 'react-router-dom';
 
 const CameraCard = (props) => {
     return (
@@ -13,7 +15,7 @@ const CameraCard = (props) => {
                     {props.text}
                 </Card.Text>
                 <div style={{maxHeight: '35%', minHeight: '35%', padding: '0 0 0 0.5rem', margin: 0}}>
-                    <Button variant="primary">View More</Button>
+                    <Link className='camera-card-link' variant="primary">View More<FontAwesomeIcon className='camera-card-icon' icon={faExternalLinkAlt} /></Link>
                 </div>
             </Card.Body>
         </Card>

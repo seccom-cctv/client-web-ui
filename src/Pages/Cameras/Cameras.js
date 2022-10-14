@@ -7,7 +7,8 @@ import CameraCard from '../../components/CameraCard/CameraCard';
 const Cameras = () => {
     return (
         <div className='cameras' data-testid="cameras">
-            <Container style={{ width: '90%', margin: '0 5%' }}>
+            <h2 className='cameras-header'>Available Cameras</h2>
+            <Container style={{ width: '100%' }}>
                 <Row style={{marginBottom: '2rem'}}>
                     <Col><CameraCard image="/cameras/image.jpg" title="House 1" text="Lorem Ipsum" /></Col>
                     <Col><CameraCard image="/cameras/image2.jpg" title="Office 2" text="Lorem Ipsum" /></Col>
