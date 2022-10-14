@@ -1,0 +1,27 @@
+.cameras {
+    padding: 120px 2rem 50px 2rem;
+}
+
+.cameras-header {
+    margin-bottom: 0;
+    height: 100%;
+}
+
+.cameras-header-wrapper {
+    margin-left: 4rem;
+    margin-right: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.camera-grid-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.break-line {
+    margin-left: 4rem;
+    margin-right: 4rem;
+    margin-bottom: 2rem;   
+}

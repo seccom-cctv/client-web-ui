@@ -1,0 +1,13 @@
+.camera-card-icon {
+    padding-left: 0.3rem;
+}
+
+.camera-card-link {
+    color: #000;
+    text-decoration: none;
+}
+
+.camera-card-link:hover {
+    color: #000;
+    text-decoration: underline;
+}
