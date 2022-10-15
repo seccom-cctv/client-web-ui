@@ -1,7 +1,7 @@
 import './Cameras.css';
 import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faList, faSquare, faSqua } from "@fortawesome/free-solid-svg-icons";
+import { faList, faSquare } from "@fortawesome/free-solid-svg-icons";
 import CamerasList from './components/CamerasList';
 import { useState } from 'react';
 import CamerasTable from './components/CamerasTable';
