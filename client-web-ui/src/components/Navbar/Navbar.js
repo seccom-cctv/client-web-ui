@@ -4,7 +4,6 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import logo from './logo.png';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -29,7 +28,7 @@ const ScreenNavbar = () => {
         <Navbar fixed="top" expand="lg" className={navbarClass ? "navbar" : "navbar-big shadow-sm p-3"} data-testid="Navbar">
             <Container>
                 <Navbar.Brand href="/" className='logo-wrapper'>
-                    <img src={logo} alt="Facebook"/>
+                    <h2 className='navbar-header'>SecCom</h2>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
