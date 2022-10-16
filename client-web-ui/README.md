@@ -1,12 +1,12 @@
 # client-web-ui
 
-## How to run:
-```
+## How to run
+```python
 ./start.sh
 ./stop.sh
 ```
 
-## Endpoint:
-```
+## Endpoint
+```python
 http://localhost:3000
 ```
