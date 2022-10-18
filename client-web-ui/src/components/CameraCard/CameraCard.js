@@ -2,7 +2,6 @@ import Card from 'react-bootstrap/Card';
 import './CameraCard.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
-import img from './image.jpg';
 import { Link } from 'react-router-dom';
 
 const CameraCard = (props) => {
