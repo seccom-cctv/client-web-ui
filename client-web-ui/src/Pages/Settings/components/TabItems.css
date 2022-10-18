@@ -1,0 +1,17 @@
+.tab-items-list {
+    list-style-type: none;
+}
+
+.tab-items-list li {
+    width: 16rem;
+    font-size: 18px;
+    padding: 0.7rem 0.5rem;
+    border: solid 1px #ccc;
+    text-align: center;
+}
+
+.tab-items-list li:hover {
+    cursor: pointer;
+    background-color: rgb(236, 215, 215);
+    transition: 0.2s;
+} 
