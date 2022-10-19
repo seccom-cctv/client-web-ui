@@ -1,6 +1,5 @@
 .about {
     margin: 8rem 6rem 3rem 6rem;
-    padding-right: 42rem;
     height: 35rem;
     display: flex;
     justify-content: space-between;
@@ -44,5 +43,34 @@
 }
 
 .notifications-wrapper {
-    padding-top: 2rem;
+    width: 100%;
+    padding-left: 4rem;
+    padding-top: 3rem;
+}
+
+.tab-items-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tab-items-list li {
+    font-size: 18px;
+    padding: 0.7rem 0.5rem;
+    border: solid 1px #ccc;
+    padding-left: 2rem;
+}
+
+.tab-items-list li:hover {
+    cursor: pointer;
+    background-color: rgb(236, 215, 215);
+    transition: 0.2s;
+} 
+
+.tab-item-icon {
+    margin-right: 0.5rem;
+}
+
+.tab-items-list-item-active {
+    background-color: rgb(236, 215, 215);
 }
