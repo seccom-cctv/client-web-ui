@@ -1,13 +1,14 @@
 .tab-items-list {
     list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 .tab-items-list li {
-    width: 16rem;
     font-size: 18px;
     padding: 0.7rem 0.5rem;
     border: solid 1px #ccc;
-    text-align: center;
+    padding-left: 2rem;
 }
 
 .tab-items-list li:hover {
@@ -15,3 +16,11 @@
     background-color: rgb(236, 215, 215);
     transition: 0.2s;
 } 
+
+.tab-item-icon {
+    margin-right: 0.5rem;
+}
+
+.tab-items-list-item-active {
+    background-color: rgb(236, 215, 215);
+}
