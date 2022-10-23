@@ -1,18 +1,51 @@
 version: 2.1
 
 jobs:
-  test:
-    machine: true
+  build:
+    machine:
+      image: ubuntu-2004:202010-01
     steps:
       - checkout
       - run:
-          name: Run Jest Tests
+          name: Installing AWS CLI
           command: |
-            cd ./client-web-ui
-            npm install
-            npm test
-            
+            sudo apt-get update
+            sudo apt install python3-pip
+            sudo pip3 install awsebcli --upgrade
+      - run: cd ./client-web-ui && yarn install --ignore-engines && npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  test:
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:
+      - attach_workspace:
+          at: .
+      - checkout
+      - run: cd ./client-web-ui && npm run test
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  deploy:
+    machine:
+        image: ubuntu-2004:202010-01
+    steps:
+      - attach_workspace:
+          at: .
+      - checkout
+      - run: aws s3 sync ./client-web-ui/build s3://es-01-cctv
+    
+
 workflows:
-  build-and-test:
+  build_test_deploy:
     jobs:
-      - test
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
