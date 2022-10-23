@@ -36,7 +36,9 @@ jobs:
       - attach_workspace:
           at: .
       - checkout
-      - run: aws s3 sync ./client-web-ui/build s3://es-01-cctv
+      - run: |
+        aws s3 sync ./client-web-ui/build s3://es-01-cctv
+        aws s3 sync ./client-web-ui/build s3://es-01-cctv --exact-timestamps --delete
     
 
 workflows:
