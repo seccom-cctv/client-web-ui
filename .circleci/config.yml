@@ -22,7 +22,6 @@ jobs:
       - attach_workspace:
         at: .
       - checkout
-      - run: cd ./client-web-ui && yarn install --ignore-engines && npm run build
       - run: cd ./client-web-ui && npm run test
 
 orbs:
