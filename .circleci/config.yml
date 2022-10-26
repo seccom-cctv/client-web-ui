@@ -15,7 +15,7 @@ jobs:
       image: ubuntu-2004:202010-01
     steps:
       - checkout
-      - run: cd ./client-web-ui && npm run test
+      - run: 'cd ./client-web-ui && npm run test'
 
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.3
