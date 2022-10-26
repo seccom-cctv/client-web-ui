@@ -9,18 +9,12 @@ jobs:
       - run:
           name: Install dependencies and build project
           command: 'cd ./client-web-ui && yarn install --ignore-engines && npm run build'
-      - persist_to_workspace:
-        root: .
-        paths:
-          - .
       - sonarcloud/scan
 
   test:
     machine:
       image: ubuntu-2004:202010-01
     steps:
-      - attach_workspace:
-        at: .
       - checkout
       - run: cd ./client-web-ui && npm run test
 
