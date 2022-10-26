@@ -28,5 +28,3 @@ workflows:
       - build:
         context: SonarCloud
       - test:
-        requires:
-          - build
