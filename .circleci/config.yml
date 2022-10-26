@@ -6,9 +6,7 @@ jobs:
       - image: ubuntu-2004:202010-01
     steps:
       - checkout
-      - run:
-          name: Install dependencies and build project
-          command: cd ./client-web-ui && yarn install --ignore-engines && npm run build
+      - run: cd ./client-web-ui && yarn install --ignore-engines && npm run build
       - sonarcloud/scan
 
 
@@ -28,5 +26,5 @@ workflows:
       - build:
         context: SonarCloud
       - test:
-          requires:
-            - build
+        requires:
+          - build
