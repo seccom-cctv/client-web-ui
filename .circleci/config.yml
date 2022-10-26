@@ -46,7 +46,6 @@ jobs:
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
     
-
 workflows:
   build_test_deploy:
     jobs:
