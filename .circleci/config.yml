@@ -7,20 +7,15 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Installing AWS CLI
-          command: |
-            sudo apt-get update
-            sudo apt install python3-pip
-            sudo pip3 install awsebcli --upgrade
-      - run: cd ./client-web-ui && yarn install --ignore-engines && npm run build
+          name: Install dependencies and build project
+          command: cd ./client-web-ui && yarn install --ignore-engines && npm run build
       - sonarcloud/scan
+
 
   test:
     machine:
       image: ubuntu-2004:202010-01
     steps:
-      - attach_workspace:
-          at: .
       - checkout
       - run: cd ./client-web-ui && npm run test
 
@@ -28,7 +23,7 @@ orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.3
     
 workflows:
-  build_test_deploy:
+  build_and_test:
     jobs:
       - build:
         context: SonarCloud
