@@ -2,10 +2,13 @@ version: 2.1
 
 jobs:
   build:
-    machine:
-      - image: ubuntu-2004:202010-01
+    docker:
+      - image: 'cimg/base:2021.04'
     steps:
       - checkout
+      - run:
+        name: Install Yarn
+        command: 'sudo apt install npm && sudo npm install --global yarn'
       - run:
           name: Install dependencies and build project
           command: 'cd ./client-web-ui && yarn install --ignore-engines && npm run build'
