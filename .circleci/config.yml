@@ -25,6 +25,11 @@ jobs:
           at: .
       - checkout
       - run: cd ./client-web-ui && npm run test
+      - store_test_results:
+          path: ./tests/reports
+      - store_artifacts:
+          path: ./tests/reports
+      - sonarcloud/scan
       - persist_to_workspace:
           root: .
           paths:
