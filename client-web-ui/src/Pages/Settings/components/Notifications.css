@@ -1,0 +1,26 @@
+.notifications-header {
+    font-size: 2.5em;
+}
+
+.notifications-title {
+    margin: 1rem 0 0.5rem 0;
+    font-size: 1.3rem;
+}
+
+.notification-preferences-form {
+    margin: 0 0 1rem 0;
+    width: 20rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.notification-preferences-form label, .notification-about-form label {
+    margin-left: 0.5rem;
+}
+
+.notification-about-form {
+    margin: 0 0 1rem 0;
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+}
