@@ -16,7 +16,7 @@ export const wso2 = (params_code) => {
 }
 
 export const redirectToLogin = () => {
-  window.location.replace(`${IDP_SERVER_URL}/oauth2/authorize?scope=openid+internal_application_mgt_view&response_type=id_token&redirect_uri=${REDIRECT_URI}&client_id=${CLIENT_KEY}`);
+  window.location.replace(`${IDP_SERVER_URL}/oauth2/authorize?scope=openid+internal_application_mgt_view&response_type=code&redirect_uri=${REDIRECT_URI}&client_id=${CLIENT_KEY}`);
 }
 
 // trades code parameter received by wso2 for an access_token
