@@ -14,7 +14,7 @@ const Login = () => {
             <div className='login-content'>
                 <h1>Welcome to SecCom!</h1>
                 <p>The best security service!</p>
-                <button className='login-button' onClick={() => navigate('/companies/list')}>
+                <button className='login-button' onClick={() => navigate('/cameras')}>
                     Login
                 </button>
             </div>
