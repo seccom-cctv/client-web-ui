@@ -7,21 +7,21 @@ import Services from './Pages/Services/Services';
 import Cameras from './Pages/Cameras/Cameras';
 import Sensors from './Pages/Sensors/Sensors';
 import Footer from './components/Footer/Footer';
+import Login from './Pages/Login/Login';
 
 function App() {
   return (
     <div data-testid="App" className='app'>
       <BrowserRouter>
-      <Navbar />
         <Routes>
-          <Route path='/' exact element={<Home />} />
+        <Route path='/' exact element={<Login />} />
+          <Route path='/home' element={<Home />} />
           <Route path='/services' element={<Services />} />
           <Route path='/cameras' element={<Cameras />} />
           <Route path='/sensors' element={<Sensors />} />
           <Route path='/settings' element={<Settings />} />
         </Routes>
       </BrowserRouter>
-      <Footer />
     </div>
   );
 }
