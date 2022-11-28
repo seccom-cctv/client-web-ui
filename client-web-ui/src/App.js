@@ -8,6 +8,7 @@ import Cameras from './Pages/Cameras/Cameras';
 import Sensors from './Pages/Sensors/Sensors';
 import Footer from './components/Footer/Footer';
 import Login from './Pages/Login/Login';
+import Buildings from './Pages/Buildings/Buildings';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/' exact element={<Login />} />
           <Route path='/home' element={<Home />} />
           <Route path='/services' element={<Services />} />
+          <Route path='/buildings' element={<Buildings />} />
           <Route path='/cameras' element={<Cameras />} />
           <Route path='/sensors' element={<Sensors />} />
           <Route path='/settings' element={<Settings />} />
