@@ -4,8 +4,11 @@ import { faUser, faKey, faLock, faBell } from '@fortawesome/free-solid-svg-icons
 import './Settings.css'
 import user from './user.png';
 import { useState } from 'react';
+import { useAuth } from "react-oidc-context";
+import Profile from './components/Profile';
 
 const About = () => {
+    const auth = useAuth();
     const [active, setActive] = useState("notifications");
 
     const selectChange = (value) => {
@@ -27,6 +30,7 @@ const About = () => {
         }
     };
 
+    if (auth.isAuthenticated) {
     return (
         <>
             <div className='about' data-testid="settings">
@@ -35,7 +39,7 @@ const About = () => {
                         <div className="tab-items-account-img-wrapper">
                             <img src={user} alt="User" />
                         </div>
-                        <h4 className="tab-items-account-name">Pedro Monteiro</h4>
+                        <h4 className="tab-items-account-name">{auth.user?.profile.name}</h4>
                     </div>
                     <div className="tab-items-buttons">
                         <div className="tab-items">
@@ -57,14 +61,17 @@ const About = () => {
                     </div>
                 </div>
                 <div className="notifications-wrapper">
-                    {active === "profile" && <p>Profile</p>}
+                    {active === "profile" && <p><Profile name={auth.user?.profile.name} email={auth.user?.profile.email} /></p>}
                     {active === "password" && <p>Password</p>}
                     {active === "security" && <p>Security</p>}
                     {active === "notifications" && <Notifications />}
                 </div>
             </div>
         </>
-    )
+    )}
+    else {
+        <div>Not authenticated</div>
+    }
 }
 
 export default About;
