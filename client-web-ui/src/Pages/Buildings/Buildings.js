@@ -5,11 +5,11 @@ import MoreBuildingsCard from './components/MoreBuildingsCard';
 import Modal from 'react-awesome-modal';
 import './Buildings.css';
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'animate.css';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from '../../components/Navbar/Navbar'
+import { useLocation } from 'react-router-dom';
 
 const Buildings = () => {
 
@@ -63,6 +63,26 @@ const Buildings = () => {
         clearForm();
         setVisible(false);
     }
+
+    const location = useLocation();
+
+    useEffect(() => {
+        // get of company buildings from id
+        let result = [];
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        fetch('http://localhost:8082/v1/building/', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                data.forEach((info) => {
+                    result.push(<BuildingCard key={info.name} text={info.name} building={info} />);
+                });
+                setBuildingsList(result);
+            });
+    }, [])
+
 
     return (
         <>
