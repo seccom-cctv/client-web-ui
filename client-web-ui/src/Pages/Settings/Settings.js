@@ -6,6 +6,7 @@ import user from './user.png';
 import { useState } from 'react';
 import { useAuth } from "react-oidc-context";
 import Profile from './components/Profile';
+import ScreenNavbar from '../../components/Navbar/Navbar';
 
 const About = () => {
     const auth = useAuth();
@@ -33,6 +34,7 @@ const About = () => {
     if (auth.isAuthenticated) {
     return (
         <>
+            <ScreenNavbar />
             <div className='about' data-testid="settings">
                 <div className="tab-items-wrapper">
                     <div className="tab-items-account">
