@@ -64,3 +64,13 @@
     color: #242424;
     transition: all 0.3s ease-out;
 }
+
+.loading-section {
+    margin-top: 3rem;
+    gap: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
