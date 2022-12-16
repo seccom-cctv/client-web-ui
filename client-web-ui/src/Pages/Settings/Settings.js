@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useAuth } from "react-oidc-context";
 import Profile from './components/Profile';
 import ScreenNavbar from '../../components/Navbar/Navbar';
+import { BallTriangle } from 'react-loader-spinner';
 
 const About = () => {
     const auth = useAuth();
@@ -72,7 +73,23 @@ const About = () => {
         </>
     )}
     else {
-        <div>Not authenticated</div>
+        return (
+            <>
+                <div className='loading-section'>
+                    <BallTriangle
+                        height={80}
+                        width={80}
+                        radius={5}
+                        color="#ccc"
+                        ariaLabel="ball-triangle-loading"
+                        wrapperClass={{}}
+                        wrapperStyle=""
+                        visible={true}
+                    />
+                    <p>Redirecting to Login...</p>
+                </div>
+            </>
+        )
     }
 }
 

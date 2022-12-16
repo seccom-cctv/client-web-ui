@@ -10,10 +10,15 @@ import 'animate.css';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from '../../components/Navbar/Navbar'
 import { useLocation } from 'react-router-dom';
+import { useAuth } from "react-oidc-context";
+import { BallTriangle } from 'react-loader-spinner';
 
 const Buildings = () => {
+    const auth = useAuth();
+    const token = auth.user?.access_token;
 
     const [visible, setVisible] = useState(false);
+    const [company, setCompany] = useState(0);
     const [buildingsList, setBuildingsList] = useState([]);
     const [buildingName, setBuildingName] = useState("");
     const [buildingAddress, setBuildingAddress] = useState("");
@@ -42,7 +47,41 @@ const Buildings = () => {
             return;
         }
 
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: buildingName,
+                address: buildingAddress,
+                company_id: company
+            })
+        };
+        fetch('http://localhost:8082/v1/building/', requestOptions)
+            .then(data => {
+                console.log(data.status);
+                if (data && parseInt(data.status) === 200) {
+                    setBuildingsList(buildingsList.concat(
+                        <div className='animate__animated animate__fadeInDown'>
+                            <BuildingCard key={buildingName} text={buildingName} building={data} />
+                        </div>
+                    )
+                    );
+                    toast.info('New Building Created !', {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 2000
+                    });
+                } else {
+                    toast.error('Something went wrong !', {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 2000
+                    });
+                    throw new Error('Something went wrong...');
+                }
+            })
+            .catch(error => console.log(error));
+        
         clearForm();
+
     };
 
     const handleBuildingNameChange = (event) => {
@@ -69,53 +108,83 @@ const Buildings = () => {
     useEffect(() => {
         // get of company buildings from id
         let result = [];
+        let company = 0;
+        console.log(token)
+
         const requestOptions = {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
         };
-        fetch('http://localhost:8082/v1/building/', requestOptions)
+        fetch('http://localhost:8082/v1/building/manager_buildings', requestOptions)
             .then(response => response.json())
             .then(data => {
-                data.forEach((info) => {
-                    result.push(<BuildingCard key={info.name} text={info.name} building={info} />);
-                });
+                data.map((info) => {
+                    console.log(info);
+                    result.push(
+                        <BuildingCard key={info.name} text={info.name} building={info}  />
+                    )
+                } )
+                setCompany(company);
                 setBuildingsList(result);
-            });
+            })
     }, [])
 
-
-    return (
-        <>
-        <Navbar />
-            <ToastContainer />
-            <div className="buildings" data-testid="buildings">
-                <h2 className="buildings-header">My Buildings</h2>
-                <div id="buildings-list-id" className='building-list'>
-                    {buildingsList}
-                    <MoreBuildingsCard text="New Building" onClick={OpenModal} />
-                    <Modal visible={visible} width="400" effect="fadeInDown" onClickAway={CloseModal}>
-                        <div id="add-building-modal"className='building-modal'>
-                            <h1 className='building-modal-title'>Add Building</h1>
-                            <div className='building-modal-content'>
-                                <label htmlFor="building-name">Name</label>
-                                <input id='building-name' type="text" value={buildingName} onChange={handleBuildingNameChange} placeholder="Building name..." />
-                                {buildingNameError && <span id="invalid-building-name"className='invalid-field'> * Building name invalid.</span>}
+    if (auth.isAuthenticated) {
+        return (
+            <>
+                <Navbar />
+                <ToastContainer />
+                <div className="buildings" data-testid="buildings">
+                    <h2 className="buildings-header">My Buildings</h2>
+                    <div id="buildings-list-id" className='building-list'>
+                        {buildingsList}
+                        <MoreBuildingsCard text="New Building" onClick={OpenModal} />
+                        <Modal visible={visible} width="400" effect="fadeInDown" onClickAway={CloseModal}>
+                            <div id="add-building-modal" className='building-modal'>
+                                <h1 className='building-modal-title'>Add Building</h1>
+                                <div className='building-modal-content'>
+                                    <label htmlFor="building-name">Name</label>
+                                    <input id='building-name' type="text" value={buildingName} onChange={handleBuildingNameChange} placeholder="Building name..." />
+                                    {buildingNameError && <span id="invalid-building-name" className='invalid-field'> * Building name invalid.</span>}
+                                </div>
+                                <div className='building-modal-content'>
+                                    <label htmlFor="building-addres">Address</label>
+                                    <input id='building-address' type="text" value={buildingAddress} onChange={handleBuildingAddressChange} placeholder="Building address..." />
+                                    {buildingAddressError && <span id="invalid-building-address" className='invalid-field'> * Building address invalid.</span>}
+                                </div>
+                                <div className='building-modal-buttons'>
+                                    <AwesomeButton type="primary" onPress={onAddBtnClick}>Add</AwesomeButton>
+                                    <AwesomeButton type="danger" onPress={CloseModal}>Close</AwesomeButton>
+                                </div>
                             </div>
-                            <div className='building-modal-content'>
-                                <label htmlFor="building-addres">Address</label>
-                                <input id='building-address' type="text" value={buildingAddress} onChange={handleBuildingAddressChange} placeholder="Building address..." />
-                                {buildingAddressError && <span id="invalid-building-address"className='invalid-field'> * Building address invalid.</span>}
-                            </div>
-                            <div className='building-modal-buttons'>
-                                <AwesomeButton type="primary" onPress={onAddBtnClick}>Add</AwesomeButton>
-                                <AwesomeButton type="danger" onPress={CloseModal}>Close</AwesomeButton>
-                            </div>
-                        </div>
-                    </Modal>
+                        </Modal>
+                    </div>
                 </div>
-            </div>
-        </>
-    )
+            </>
+        )
+    }
+    else {
+        return (
+            <>
+                <div className='loading-section'>
+                    <BallTriangle
+                        height={80}
+                        width={80}
+                        radius={5}
+                        color="#ccc"
+                        ariaLabel="ball-triangle-loading"
+                        wrapperClass={{}}
+                        wrapperStyle=""
+                        visible={true}
+                    />
+                    <p>Redirecting to Login...</p>
+                </div>
+            </>
+        )
+    }
 }
 
 export default Buildings;
