@@ -15,7 +15,6 @@ import { BallTriangle } from 'react-loader-spinner';
 
 const Buildings = () => {
     const auth = useAuth();
-    const token = auth.user?.access_token;
 
     const [visible, setVisible] = useState(false);
     const [company, setCompany] = useState(0);
@@ -49,7 +48,10 @@ const Buildings = () => {
 
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth.user?.access_token}`
+            },
             body: JSON.stringify({
                 name: buildingName,
                 address: buildingAddress,
@@ -58,7 +60,6 @@ const Buildings = () => {
         };
         fetch('http://localhost:8082/v1/building/', requestOptions)
             .then(data => {
-                console.log(data.status);
                 if (data && parseInt(data.status) === 200) {
                     setBuildingsList(buildingsList.concat(
                         <div className='animate__animated animate__fadeInDown'>
@@ -103,34 +104,34 @@ const Buildings = () => {
         setVisible(false);
     }
 
-    const location = useLocation();
-
-    useEffect(() => {
-        // get of company buildings from id
+    const GetUserBuildings = () => {
         let result = [];
         let company = 0;
-        console.log(token)
 
         const requestOptions = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${auth.user?.access_token}`
             },
         };
         fetch('http://localhost:8082/v1/building/manager_buildings', requestOptions)
             .then(response => response.json())
             .then(data => {
                 data.map((info) => {
-                    console.log(info);
                     result.push(
-                        <BuildingCard key={info.name} text={info.name} building={info}  />
+                        <BuildingCard key={info.name} text={info.name} building={info} onClick={null} />
                     )
                 } )
                 setCompany(company);
                 setBuildingsList(result);
             })
-    }, [])
+    }
+
+    useEffect(() => {
+        // get of company buildings from id
+        GetUserBuildings();
+    }, [auth.user?.access_token])
 
     if (auth.isAuthenticated) {
         return (

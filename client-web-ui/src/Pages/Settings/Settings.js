@@ -11,7 +11,7 @@ import { BallTriangle } from 'react-loader-spinner';
 
 const About = () => {
     const auth = useAuth();
-    const [active, setActive] = useState("notifications");
+    const [active, setActive] = useState("profile");
 
     const selectChange = (value) => {
         switch (value) {

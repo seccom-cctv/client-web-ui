@@ -9,6 +9,8 @@ import Sensors from './Pages/Sensors/Sensors';
 import Footer from './components/Footer/Footer';
 import Login from './Pages/Login/Login';
 import Buildings from './Pages/Buildings/Buildings';
+import BuildingDetails from './Pages/BuildingDetails/BuildingDetails';
+import Intrusions from './Pages/Intrusions/Intrusions';
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route path='/cameras' element={<Cameras />} />
           <Route path='/sensors' element={<Sensors />} />
           <Route path='/settings' element={<Settings />} />
+          <Route path='/building' element={<BuildingDetails />} />
+          <Route path='/intrusions' element={<Intrusions />} />
         </Routes>
       </BrowserRouter>
     </div>
