@@ -133,7 +133,6 @@ const Buildings = () => {
         GetUserBuildings();
     }, [auth.user?.access_token])
 
-    if (auth.isAuthenticated) {
         return (
             <>
                 <Navbar />
@@ -167,25 +166,5 @@ const Buildings = () => {
             </>
         )
     }
-    else {
-        return (
-            <>
-                <div className='loading-section'>
-                    <BallTriangle
-                        height={80}
-                        width={80}
-                        radius={5}
-                        color="#ccc"
-                        ariaLabel="ball-triangle-loading"
-                        wrapperClass={{}}
-                        wrapperStyle=""
-                        visible={true}
-                    />
-                    <p>Redirecting to Login...</p>
-                </div>
-            </>
-        )
-    }
-}
 
 export default Buildings;

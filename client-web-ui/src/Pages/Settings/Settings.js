@@ -73,6 +73,7 @@ const About = () => {
         </>
     )}
     else {
+        setTimeout(() => window.location.replace("/"), 1500);
         return (
             <>
                 <div className='loading-section'>

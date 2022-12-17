@@ -11,8 +11,7 @@ import { useLocation } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar'
 import { useAuth } from "react-oidc-context";
-
-
+import { BallTriangle } from 'react-loader-spinner';
 
 const BuildingDetails = () => {
     const auth = useAuth();
@@ -131,14 +130,16 @@ const BuildingDetails = () => {
         fetch('http://localhost:8082/v1/device/building_devices?building_id=' + location.state.building.id, requestOptions)
             .then(response => response.json())
             .then(data => {
+                
                 data.forEach((info) => {
-                    result.push(<BuildingTableRow key={info.id} device={info.name} date="29/10/2022" health="10%" onClick={() => { removeDevice(info.id) }} />);
+                    var date = info.created_at.split('T')[0];
+                    result.push(<BuildingTableRow key={info.id} device={info.name} date={date} health="-" onClick={() => { removeDevice(info.id) }} />);
                 });
                 setDeviceList(result);
             });
         setBuilding(location.state.building);
         // eslint-disable-next-line
-    }, [auth.user?.access_token])
+    }, [auth.user?.access_token, renderDevices])
 
     const clearForm = () => {
         setDeviceName("");
@@ -172,9 +173,10 @@ const BuildingDetails = () => {
             .then(data => {
                 console.log(data)
                 if (data) {
+                    let date = new Date().toJSON().split('T')[0];
                     setDeviceList(devicesList.concat(
                         <div className='animate__animated animate__fadeInDown'>
-                            <BuildingTableRow key={data.id} device={deviceName} date="29/10/2022" health="10%" onClick={() => { removeDevice(data.id) }} />
+                            <BuildingTableRow key={data.id} device={deviceName} date={date} health="-" onClick={() => { removeDevice(data.id) }} />
                         </div>
                     )
                     );
@@ -244,6 +246,7 @@ const BuildingDetails = () => {
         setVisible(false);
     }
 
+    if (auth.isAuthenticated) {
     return (
         <>
             <Navbar />
@@ -327,7 +330,26 @@ const BuildingDetails = () => {
                 </ul>
             </div>
         </>
-    )
+    ) }
+    else {
+        return (
+            <>
+                <div className='loading-section'>
+                    <BallTriangle
+                        height={80}
+                        width={80}
+                        radius={5}
+                        color="#ccc"
+                        ariaLabel="ball-triangle-loading"
+                        wrapperClass={{}}
+                        wrapperStyle=""
+                        visible={true}
+                    />
+                    <p>Redirecting to Login...</p>
+                </div>
+            </>
+        )
+    }
 }
 
 export default BuildingDetails;
