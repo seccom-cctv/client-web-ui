@@ -7,10 +7,11 @@ import { useState } from 'react';
 import { useAuth } from "react-oidc-context";
 import Profile from './components/Profile';
 import ScreenNavbar from '../../components/Navbar/Navbar';
+import { BallTriangle } from 'react-loader-spinner';
 
 const About = () => {
     const auth = useAuth();
-    const [active, setActive] = useState("notifications");
+    const [active, setActive] = useState("profile");
 
     const selectChange = (value) => {
         switch (value) {
@@ -72,7 +73,24 @@ const About = () => {
         </>
     )}
     else {
-        <div>Not authenticated</div>
+        setTimeout(() => window.location.replace("/"), 1500);
+        return (
+            <>
+                <div className='loading-section'>
+                    <BallTriangle
+                        height={80}
+                        width={80}
+                        radius={5}
+                        color="#ccc"
+                        ariaLabel="ball-triangle-loading"
+                        wrapperClass={{}}
+                        wrapperStyle=""
+                        visible={true}
+                    />
+                    <p>Redirecting to Login...</p>
+                </div>
+            </>
+        )
     }
 }
 
