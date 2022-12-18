@@ -34,7 +34,7 @@ workflows:
       - aws-ecr/build-and-push-image:
           path: ./client-web-ui/
           region: ${AWS_REGION}
-          repo: ${AWS_ECR_ACCOUNT_URL}/${CIRCLE_PROJECT_REPONAME}
+          repo: ${CIRCLE_PROJECT_REPONAME}
           tag: latest
           #requires:
           #  - test
