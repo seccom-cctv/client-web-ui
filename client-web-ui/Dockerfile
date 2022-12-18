@@ -2,9 +2,9 @@
 FROM node:16.14.2
 
 # set working directory
-WORKDIR /client-web-ui
+WORKDIR /home/client-web-ui
 
-COPY package.json yarn.lock ./
+COPY package.json .
 RUN yarn install
 
 COPY . .

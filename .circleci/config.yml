@@ -1,5 +1,9 @@
 version: 2.1
 
+orbs:
+  aws-ecr: circleci/aws-ecr@8.1.3
+  sonarcloud: sonarsource/sonarcloud@1.0.3
+
 jobs:
   build:
     docker:
@@ -19,14 +23,23 @@ jobs:
       - run: cd ./client-web-ui && yarn install --ignore-engines && npm run build
       - run: cd ./client-web-ui && npm run test
 
-orbs:
-  sonarcloud: sonarsource/sonarcloud@1.0.3
-
 workflows:
   main:
     jobs:
-      - test
-      - build:
-          context: SonarCloud
-          requires:
-            - test
+      #- test
+      #- build:
+      #    context: SonarCloud
+      #    requires:
+      #      - test
+      - aws-ecr/build-and-push-image:
+          path: ./client-web-ui/
+          region: ${AWS_REGION}
+          repo: ${CIRCLE_PROJECT_REPONAME}
+          tag: latest
+          #requires:
+          #  - test
+          filters:
+            branches:
+              only:
+                - main
+                - develop
