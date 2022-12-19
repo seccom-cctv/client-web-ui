@@ -55,10 +55,10 @@ const Buildings = () => {
             body: JSON.stringify({
                 name: buildingName,
                 address: buildingAddress,
-                company_id: company
+                company_id: 1
             })
         };
-        fetch('http://localhost:8082/v1/building/', requestOptions)
+        fetch('https://1ffndug182.execute-api.us-east-1.amazonaws.com/test/sitesmanagement/v1/building/', requestOptions)
             .then(data => {
                 if (data && parseInt(data.status) === 200) {
                     setBuildingsList(buildingsList.concat(
@@ -115,9 +115,10 @@ const Buildings = () => {
                 'Authorization': `Bearer ${auth.user?.access_token}`
             },
         };
-        fetch('http://localhost:8082/v1/building/manager_buildings', requestOptions)
+        fetch('https://1ffndug182.execute-api.us-east-1.amazonaws.com/test/sitesmanagement/v1/building/manager_buildings', requestOptions)
             .then(response => response.json())
             .then(data => {
+                console.log("data: ", data)
                 data.map((info) => {
                     result.push(
                         <BuildingCard key={info.name} text={info.name} building={info} onClick={null} />
