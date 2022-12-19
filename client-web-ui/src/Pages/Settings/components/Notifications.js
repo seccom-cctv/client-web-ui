@@ -1,6 +1,21 @@
+import { useState } from 'react';
 import './Notifications.css'
 
 const Notifications = () => {
+
+    const [emailChecked, setEmailChecked] = useState(false);
+    const [noContactChecked, setnoContactChecked] = useState(true);
+
+    const handleEmailCheck = () => {
+        setEmailChecked(true);
+        setnoContactChecked(false);
+    }
+
+    const handlenoContactCheck = () => {
+        setEmailChecked(false);
+        setnoContactChecked(true);
+    }
+
     return (
         <div className="notifications">
             <h3 className="notifications-header">Notifications</h3>
@@ -8,15 +23,11 @@ const Notifications = () => {
                 <h5 className="notifications-title">Notification Preference</h5>
                 <form className="notification-preferences-form">
                     <div>
-                        <input type="checkbox" id="email" name="email" value="email" />
+                        <input type="checkbox" onChange={handleEmailCheck} checked={emailChecked} id="email" name="email" value="email" />
                         <label for="email">Email</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="sms" name="sms" value="sms" />
-                        <label for="sms">SMS</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="nocontact" name="nocontact" value="nocontact" />
+                        <input type="checkbox" onChange={handlenoContactCheck} checked={noContactChecked} id="nocontact" name="nocontact" value="nocontact" />
                         <label for="nocontact">No contact</label>
                     </div>
                 </form>
