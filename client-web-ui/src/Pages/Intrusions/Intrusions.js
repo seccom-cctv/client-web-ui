@@ -8,8 +8,8 @@ const Intrusions = (props) => {
     const [intrusionList, setIntrusionList] = useState([]);
 
     const s3 = new S3({
-        accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID,
-        secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
+        accessKeyId: 'AKIA6JI5KFJUBAJVWMXO',
+        secretAccessKey: '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',
         region: 'eu-west-3'
     });
 
@@ -38,7 +38,7 @@ const Intrusions = (props) => {
                     <li className="table-header">
                         <div className="col col-11">ID</div>
                         <div className="col col-22">Date</div>
-                        <div className="col col-33">Type</div>
+                        <div className="col col-33">Camera</div>
                         <div className="col col-44">View</div>
                     </li>
                     {intrusionList}
