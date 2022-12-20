@@ -36,17 +36,6 @@ const ScreenNavbar = () => {
                         <Nav.Link style={{paddingLeft: "1rem", paddingRight: "1rem"}}>
                             <Link className='navbar-item navbar-item-change' to="/buildings">Buildings</Link>
                         </Nav.Link>
-                        <NavDropdown style={{paddingLeft: "1rem", paddingRight: "1rem"}} title="Services" id="basic-nav-dropdown">
-                            <NavDropdown.Item><Link className='navbar-item navbar-item-change' to="/cameras">Cameras</Link></NavDropdown.Item>
-                            <NavDropdown.Item>
-                                <Link className='navbar-item navbar-item-change' to="/sensors">Sensors</Link>
-                            </NavDropdown.Item>
-                            <NavDropdown.Item><Link className='navbar-item navbar-item-change' to="/services">Alarms</Link></NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item>
-                                <Link className='navbar-item navbar-item-change' to="/settings">Help</Link>
-                            </NavDropdown.Item>
-                        </NavDropdown>
                         <Nav.Link style={{paddingLeft: "1rem", paddingRight: "1rem"}}>
                             <Link className='navbar-item navbar-item-change' to="/settings">Settings</Link>
                         </Nav.Link>

@@ -74,3 +74,22 @@
 .tab-items-list-item-active {
     background-color: rgb(236, 215, 215);
 }
+
+.logout-section {
+    width: 80%;
+    background-color: yellow;
+    margin: 4rem 10%;
+}
+
+.logout-section button {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    outline: none;
+    border: solid 1.2px #ccc;
+    background-color: #fff;
+}
+
+.logout-section button:hover {
+    background-color: #ccc;
+    transition: 0.2s ease-in-out;
+}
