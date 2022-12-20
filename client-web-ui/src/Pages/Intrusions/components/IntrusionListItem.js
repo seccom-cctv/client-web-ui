@@ -8,9 +8,9 @@ const IntrusionListItem = (props) => {
     }
     return (
         <li className="table-row" data-testid="building-table-row">
-            <div className="col col-11" data-label="id">{props.id}</div>
+            <div className="col col-11" data-label="id">{props.id.split("_")[1].split("-")[0]}</div>
             <div className="col col-22" data-label="date">{
-                props.date.split(" ")[1]+" "+props.date.split(" ")[2]+" "+props.date.split(" ")[3]+" "+props.date.split(" ")[4]
+                props.date.split("T")[0] + " " +props.date.split("T")[1].split("+")[0]
             }</div>
             <div className="col col-33" data-label="type">{props.type.split("-")[0]}</div>
             <div className="col col-44 col-icon" data-label="Logs">
