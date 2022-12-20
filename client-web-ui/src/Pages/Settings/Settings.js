@@ -32,7 +32,12 @@ const About = () => {
         }
     };
 
-    if (auth.isAuthenticated) {
+    const handleLogout = () => {
+        auth.removeUser();
+        setTimeout(() => window.location.replace("/"), 1500);
+    }
+
+    if (auth.user?.access_token) {
     return (
         <>
             <ScreenNavbar />
@@ -50,9 +55,6 @@ const About = () => {
                                 <li onClick={() => selectChange("profile")} className={active === "profile" ? "tab-items-list-item-active" : "tab-items-list-item"}>
                                     <FontAwesomeIcon icon={faUser} className="tab-item-icon" />Profile
                                 </li>
-                                <li onClick={() => selectChange("password")} className={active === "password" ? "tab-items-list-item-active" : "tab-items-list-item"}>
-                                    <FontAwesomeIcon icon={faLock} className="tab-item-icon" />Password
-                                </li>
                                 <li onClick={() => selectChange("security")} className={active === "security" ? "tab-items-list-item-active" : "tab-items-list-item"}>
                                     <FontAwesomeIcon icon={faKey} className="tab-item-icon" />Security
                                 </li>
@@ -60,6 +62,9 @@ const About = () => {
                                     <FontAwesomeIcon icon={faBell} className="tab-item-icon " />Notifications
                                 </li>
                             </ul>
+                        </div>
+                        <div className='logout-section'>
+                            <button onClick={handleLogout}>Logout</button>
                         </div>
                     </div>
                 </div>
@@ -73,7 +78,6 @@ const About = () => {
         </>
     )}
     else {
-        setTimeout(() => window.location.replace("/"), 1500);
         return (
             <>
                 <div className='loading-section'>
