@@ -7,6 +7,31 @@ const Notifications = () => {
     const [emailChecked, setEmailChecked] = useState(false);
     const [noContactChecked, setnoContactChecked] = useState(true);
 
+    useEffect(() => {
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth.user?.access_token}`
+            },
+        };
+        fetch('http://localhost:8082/v1/manager', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                var x = data[0].preferences.replace("\\", "");
+                console.log(x)
+                if (String(x).includes("email")) {
+                    console.log("email")
+                    setEmailChecked(true);
+                    setnoContactChecked(false);
+                } else {
+                    setEmailChecked(false);
+                    setnoContactChecked(true);
+                }
+            });
+        // eslint-disable-next-line
+    }, [auth.user?.access_token])
+
     const handleEmailCheck = () => {
         setEmailChecked(true);
         setnoContactChecked(false);
