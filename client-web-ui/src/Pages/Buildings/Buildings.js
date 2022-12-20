@@ -58,7 +58,7 @@ const Buildings = () => {
                 company_id: 1
             })
         };
-        fetch('http://localhost:8082/v1/building/', requestOptions)
+        fetch('https://gxdowy8at3.execute-api.eu-west-3.amazonaws.com/test/sitesmanagement/v1/building/', requestOptions)
             .then(data => {
                 if (data && parseInt(data.status) === 200) {
                     setBuildingsList(buildingsList.concat(
@@ -115,7 +115,7 @@ const Buildings = () => {
                 'Authorization': `Bearer ${auth.user?.access_token}`
             },
         };
-        fetch('http://localhost:8082/v1/building/manager_buildings', requestOptions)
+        fetch('https://gxdowy8at3.execute-api.eu-west-3.amazonaws.com/test/sitesmanagement/v1/building/manager_buildings', requestOptions)
             .then(response => response.json())
             .then(data => {
                 console.log("data: ", data)

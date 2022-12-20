@@ -15,7 +15,7 @@ const Notifications = () => {
                 'Authorization': `Bearer ${auth.user?.access_token}`
             },
         };
-        fetch('http://localhost:8082/v1/manager', requestOptions)
+        fetch('https://gxdowy8at3.execute-api.eu-west-3.amazonaws.com/test/sitesmanagement/v1/manager', requestOptions)
             .then(response => response.json())
             .then(data => {
                 var x = data[0].preferences.replace("\\", "");
@@ -48,7 +48,7 @@ const Notifications = () => {
                 company_id: 0,
             })
         };
-        fetch('http://localhost:8082/v1/manager/', requestOptions)
+        fetch('https://gxdowy8at3.execute-api.eu-west-3.amazonaws.com/test/sitesmanagement/v1/manager/', requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data) {
@@ -75,7 +75,7 @@ const Notifications = () => {
                 company_id: 0,
             })
         };
-        fetch('http://localhost:8082/v1/manager/', requestOptions)
+        fetch('https://gxdowy8at3.execute-api.eu-west-3.amazonaws.com/test/sitesmanagement/v1/manager/', requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data) {
