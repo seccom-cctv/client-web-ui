@@ -30,6 +30,7 @@ const BuildingDetails = () => {
 
     useEffect(() => {
         const { building } = location.state // "useLocation" to get the state
+        console.log("iddd: ", building.id)
         const requestOptions = {
             method: 'GET',
             headers: {
@@ -37,7 +38,7 @@ const BuildingDetails = () => {
                 'Authorization': `Bearer ${auth.user?.access_token}`
             },
         };
-        fetch('https://1ffndug182.execute-api.us-east-1.amazonaws.com/test/sitesmanagement/v1/building/?id=' + building.id, requestOptions)
+        fetch('http://localhost:8082/v1/building/?id=' + building.id, requestOptions)
             .then(response => response.json())
             .then(data => {
                 setBuildingName(data[0].name);
@@ -91,7 +92,7 @@ const BuildingDetails = () => {
                 company_id: location.state.building.company_id
             })
         };
-        fetch('https://1ffndug182.execute-api.us-east-1.amazonaws.com/test/sitesmanagement/v1/building/' + location.state.building.id, requestOptions)
+        fetch('http://localhost:8082/v1/building/' + location.state.building.id, requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data) {
@@ -127,7 +128,7 @@ const BuildingDetails = () => {
                 'Authorization': `Bearer ${auth.user?.access_token}`
             },
         };
-        fetch('https://1ffndug182.execute-api.us-east-1.amazonaws.com/test/sitesmanagement/v1/device/building_devices?building_id=' + location.state.building.id, requestOptions)
+        fetch('http://localhost:8082/v1/device/building_devices?building_id=' + location.state.building.id, requestOptions)
             .then(response => response.json())
             .then(data => {
                 
@@ -168,7 +169,7 @@ const BuildingDetails = () => {
                 building_id: location.state.building.id
             })
         };
-        fetch('https://1ffndug182.execute-api.us-east-1.amazonaws.com/test/sitesmanagement/v1/device/', requestOptions)
+        fetch('http://localhost:8082/v1/device/', requestOptions)
             .then(response => response.json())
             .then(data => {
                 console.log(data)
@@ -287,7 +288,7 @@ const BuildingDetails = () => {
                                 <input type="text" value={buildingName} onChange={handleBuildingName} id="input-name" />
                             </div>
                             <div className='building-details-content-items'>
-                                <h5>Location:</h5>
+                                <h5>Address:</h5>
                                 <input type="text" value={buildingAddress} onChange={handleBuildingAddress} id="input-address" />
                             </div>
                         </>

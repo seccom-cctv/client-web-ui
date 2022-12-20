@@ -52,7 +52,7 @@ const Login = () => {
                 'Authorization': `Bearer ${token}`
             },
         };
-        fetch('https://1ffndug182.execute-api.us-east-1.amazonaws.com/test/sitesmanagement/v1/building/manager_buildings', requestOptions)
+        fetch('http://localhost:8082/v1/building/manager_buildings', requestOptions)
             .then(response => response.json())
             .then(data => {
                 console.log(data);

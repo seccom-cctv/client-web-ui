@@ -1,19 +1,64 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Notifications.css'
+import { useAuth } from "react-oidc-context";
 
 const Notifications = () => {
-
+    const auth = useAuth();
     const [emailChecked, setEmailChecked] = useState(false);
     const [noContactChecked, setnoContactChecked] = useState(true);
 
     const handleEmailCheck = () => {
         setEmailChecked(true);
         setnoContactChecked(false);
+        const requestOptions = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth.user?.access_token}`
+            },
+            body: JSON.stringify({
+                idp_id: "string",
+                permissions: 0,
+                preferences: {"notifications": {"from": ["alarms", "cameras"], "to": ["email"]}},
+                company_id: 0,
+            })
+        };
+        fetch('http://localhost:8082/v1/manager/'+0, requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    console.log("yes")
+                } else {
+                    console.log("error")
+                }
+            });
     }
 
-    const handlenoContactCheck = () => {
+    const handleNoContactCheck = () => {
         setEmailChecked(false);
         setnoContactChecked(true);
+        const requestOptions = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth.user?.access_token}`
+            },
+            body: JSON.stringify({
+                idp_id: "string",
+                permissions: 0,
+                preferences: {"notifications": {"from": ["alarms", "cameras"], "to": [""]}},
+                company_id: 0,
+            })
+        };
+        fetch('http://localhost:8082/v1/manager/'+0, requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    console.log("yes")
+                } else {
+                    console.log("error")
+                }
+            });
     }
 
     return (
@@ -27,7 +72,7 @@ const Notifications = () => {
                         <label for="email">Email</label>
                     </div>
                     <div>
-                        <input type="checkbox" onChange={handlenoContactCheck} checked={noContactChecked} id="nocontact" name="nocontact" value="nocontact" />
+                        <input type="checkbox" onChange={handleNoContactCheck} checked={noContactChecked} id="nocontact" name="nocontact" value="nocontact" />
                         <label for="nocontact">No contact</label>
                     </div>
                 </form>
@@ -36,16 +81,12 @@ const Notifications = () => {
                 <h5 className="notifications-title">Receive Notifications About</h5>
                 <form className="notification-about-form">
                     <div>
-                        <input type="checkbox" id="alarms" name="alarm" value="alarm" />
+                        <input disabled type="checkbox" id="alarms" name="alarm" value="alarm" />
                         <label for="alarm">Alarms</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="intruders" name="intruder" value="intruder" />
-                        <label for="intruder">Intruders</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="animals" name="animal" value="animal" />
-                        <label for="animal">Animals</label>
+                        <input disabled type="checkbox" id="intruders" name="intruder" value="intruder" />
+                        <label for="intruder">Cameras</label>
                     </div>
                 </form>
             </div>
