@@ -19,11 +19,11 @@ const Notifications = () => {
             body: JSON.stringify({
                 idp_id: "string",
                 permissions: 0,
-                preferences: {"notifications": {"from": ["alarms", "cameras"], "to": ["email"]}},
+                preferences: '{"notifications": {"from": ["alarms", "cameras"], "to": ["email"]}}',
                 company_id: 0,
             })
         };
-        fetch('http://localhost:8082/v1/manager/'+0, requestOptions)
+        fetch('http://localhost:8082/v1/manager/', requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data) {
@@ -46,11 +46,11 @@ const Notifications = () => {
             body: JSON.stringify({
                 idp_id: "string",
                 permissions: 0,
-                preferences: {"notifications": {"from": ["alarms", "cameras"], "to": [""]}},
+                preferences:'{"notifications": {"from": ["alarms", "cameras"], "to": [""]}}',
                 company_id: 0,
             })
         };
-        fetch('http://localhost:8082/v1/manager/'+0, requestOptions)
+        fetch('http://localhost:8082/v1/manager/', requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data) {
@@ -81,11 +81,11 @@ const Notifications = () => {
                 <h5 className="notifications-title">Receive Notifications About</h5>
                 <form className="notification-about-form">
                     <div>
-                        <input disabled type="checkbox" id="alarms" name="alarm" value="alarm" />
+                        <input checked disabled type="checkbox" id="alarms" name="alarm" value="alarm" />
                         <label for="alarm">Alarms</label>
                     </div>
                     <div>
-                        <input disabled type="checkbox" id="intruders" name="intruder" value="intruder" />
+                        <input checked disabled type="checkbox" id="intruders" name="intruder" value="intruder" />
                         <label for="intruder">Cameras</label>
                     </div>
                 </form>
