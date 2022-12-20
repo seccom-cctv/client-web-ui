@@ -6,22 +6,23 @@ import { useEffect, useState } from 'react';
 
 const Intrusions = (props) => {
     const [intrusionList, setIntrusionList] = useState([]);
+
+    const s3 = new S3({
+        accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID,
+        secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
+        region: 'eu-west-3'
+    });
+
+    let bucketName = "seccom.video.store.1";
     let renderBucketList = [];
 
     useEffect(() => {
-        const s3 = new S3({
-            accessKeyId: 'AKIAYV57IAJ4DNJJ6OEJ',
-            secretAccessKey: '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',
-            region: 'us-east-1'
-        });
-    
-        s3.listObjectsV2({ Bucket: 'seccom.video.store' }, (err, data) => {
+        s3.listObjectsV2({ Bucket: bucketName }, (err, data) => {
             if (err) {
                 console.error(err);
             } else {
-                console.log(data.Contents); // This is an array of objects representing the objects in the bucket
                 for (let i = 0; i < data.Contents.length; i++) {
-                    renderBucketList.push(<IntrusionListItem id={i} date={data.Contents[i].LastModified.toString()} type={data.Contents[i].Key + " Size: "+ data.Contents[i].Size} />);
+                    renderBucketList.push(<IntrusionListItem id={i} date={data.Contents[i].LastModified.toString()} type={data.Contents[i].Key + " Size: " + data.Contents[i].Size} url={"https://s3.eu-west-3.amazonaws.com/seccom.video.store.1/"+data.Contents[i].Key} />);
                 }
                 setIntrusionList(renderBucketList);
             }
